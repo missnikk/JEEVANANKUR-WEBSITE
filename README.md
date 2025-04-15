@@ -39,4 +39,4 @@ Thank you for reviewing this project as part of my internship application. I am 
 Author
 
 GitHub Username: MissNikk  
-Repository: [Jeevan-Ankur-Website](https://github.com/MissNikk/Jeevan-Ankur-Website)
+
