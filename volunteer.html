@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteering with Jeevan Ankur Trust</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&family=Cinzel:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-brown: #3A1E14;
+            --medium-brown: #5A3825;
+            --light-brown: #7A4E35;
+            --tan: #A07A5C;
+            --light-tan: #CAB49B;
+            --off-white: #F3E7DB;
+            --pure-white: #FFFDFB;
+            --highlight-color: #FF6F61;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--off-white);
+            color: var(--dark-brown);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .volunteer-form {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--pure-white);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .volunteer-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--dark-brown), var(--medium-brown), var(--light-brown));
+        }
+
+        .form-section {
+            background-color: var(--pure-white);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--light-tan);
+        }
+
+        .form-section:first-child {
+            padding-top: 15px;
+        }
+
+        .btn-submit-container {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding: 30px 0;
+            position: relative;
+            background: linear-gradient(to right, transparent, var(--off-white), transparent);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--dark-brown), var(--medium-brown));
+            color: var(--pure-white);
+            padding: 18px 60px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            border: none;
+            box-shadow: 0 6px 20px rgba(58, 30, 20, 0.25);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            min-width: 200px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(58, 30, 20, 0.35);
+            background: linear-gradient(135deg, var(--dark-brown), var(--light-brown));
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 15px rgba(58, 30, 20, 0.3);
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--light-tan), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-submit:hover::after {
+            opacity: 1;
+        }
+
+        .form-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--dark-brown);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-subheading {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--medium-brown);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            border: 1px solid var(--light-tan);
+        }
+
+        .form-control:focus {
+            border-color: var(--tan);
+            box-shadow: 0 0 5px rgba(160, 122, 92, 0.5);
+        }
+
+        .form-select {
+            background-color: var(--pure-white);
+            border: 1px solid var(--medium-brown);
+            color: var(--dark-brown);
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:hover {
+            border-color: var(--dark-brown);
+            background-color: var(--off-white);
+        }
+
+        .form-select:focus {
+            border-color: var(--dark-brown);
+            box-shadow: 0 0 0 2px rgba(58, 30, 20, 0.1);
+            outline: none;
+            background-color: var(--pure-white);
+        }
+
+        .form-select option {
+            background-color: var(--pure-white);
+            color: var(--dark-brown);
+            padding: 10px;
+        }
+
+        .form-select option:checked {
+            background-color: var(--off-white);
+            color: var(--dark-brown);
+        }
+
+        .form-select option:hover {
+            background-color: var(--off-white);
+            color: var(--dark-brown);
+        }
+
+        /* Special styling for role selection */
+        .role-select-container {
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .role-select-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: var(--dark-brown);
+            font-weight: 500;
+        }
+
+        #role {
+            background-color: var(--pure-white);
+            border: 2px solid var(--medium-brown);
+            font-size: 1.2rem;
+            color: var(--dark-brown);
+            padding: 12px 15px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #role:hover {
+            border-color: var(--dark-brown);
+            box-shadow: 0 4px 12px rgba(58, 30, 20, 0.1);
+        }
+
+        #role:focus {
+            border-color: var(--dark-brown);
+            box-shadow: 0 0 0 3px rgba(58, 30, 20, 0.1);
+            outline: none;
+        }
+
+        #role option {
+            background-color: var(--pure-white);
+            color: var(--dark-brown);
+            padding: 10px;
+        }
+
+        #role option:checked {
+            background-color: var(--off-white);
+            color: var(--dark-brown);
+        }
+
+        /* Enhanced form controls */
+        .form-control:hover {
+            border-color: var(--tan);
+            background-color: var(--off-white);
+        }
+
+        .form-control:focus {
+            background-color: var(--pure-white);
+            border-color: var(--medium-brown);
+            box-shadow: 0 0 0 3px rgba(90, 56, 37, 0.1);
+        }
+
+        /* Enhanced file upload box */
+        .file-upload-heading {
+            font-size: 1rem;
+            color: var(--dark-brown);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .file-upload-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background-color: var(--pure-white);
+            border: 1px solid var(--light-tan);
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .file-name {
+            color: var(--dark-brown);
+            font-size: 0.9rem;
+        }
+
+        .choose-file-btn {
+            background-color: var(--dark-brown);
+            color: var(--pure-white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            border: none;
+            transition: all 0.3s ease;
+            margin-left: auto;
+        }
+
+        .choose-file-btn:hover {
+            background-color: var(--medium-brown);
+            transform: translateY(-1px);
+        }
+
+        /* Enhanced section transitions */
+        #student-fields, #non-student-fields {
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced status display */
+        .status-display {
+            margin-bottom: 35px;
+            padding: 15px;
+            background-color: var(--dark-brown);
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--pure-white);
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .status-display.approved {
+            background-color: var(--medium-brown);
+        }
+
+        .status-display.completed {
+            background-color: var(--light-brown);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--pure-white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .popup h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-brown);
+            margin-bottom: 10px;
+        }
+
+        .popup p {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-brown);
+            margin-bottom: 20px;
+        }
+
+        .popup .btn-close {
+            background-color: var(--dark-brown);
+            color: var(--pure-white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .popup .btn-close:hover {
+            background-color: var(--medium-brown);
+        }
+
+        .completion-fields {
+            display: none;
+            padding: 20px;
+            background-color: var(--pure-white);
+            border: 1px solid var(--light-tan);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .completion-fields.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Reduce spacing between sections */
+        #student-fields, #non-student-fields {
+            margin-top: 10px;
+        }
+
+        /* Identity Proof Section Styling */
+        .identity-proof-section {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: var(--pure-white);
+            border: 1px solid var(--light-tan);
+            border-radius: 8px;
+        }
+
+        .identity-proof-section .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="volunteer-form">
+        <h1 class="form-heading">Volunteering</h1>
+        <p class="form-subheading">Be the Change, Contribute to a Cause</p>
+        <div class="status-display">
+            Status: <span id="status">Applied</span>
+        </div>
+        <form id="volunteerForm">
+            <div class="form-section">
+                <div class="form-group role-select-container">
+                    <label for="role">Choose Your Role</label>
+                    <select class="form-select" id="role" required>
+                        <option value="">Select your role</option>
+                        <option value="student">Student</option>
+                        <option value="non-student">Non-Student</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input type="tel" class="form-control" id="contact" placeholder="Enter your contact number" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email ID</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="reason">What motivates you to volunteer?</label>
+                    <textarea class="form-control" id="reason" rows="3" placeholder="Share your motivation..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="offer">What can you offer?</label>
+                    <textarea class="form-control" id="offer" rows="3" placeholder="Skills or services you can offer"></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="duration">Time Duration</label>
+                    <input type="text" class="form-control" id="duration" placeholder="e.g., 15 days, 1 month">
+                </div>
+                <div class="form-group">
+                    <label for="certificate">Do you need a certificate?</label>
+                    <select class="form-select" id="certificate">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="donation">Have you made any donations?</label>
+                    <select class="form-select" id="donation">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group" id="donation-details" style="display: none;">
+                    <label for="donation-description">Please share details about your donation</label>
+                    <textarea class="form-control" id="donation-description" rows="3" placeholder="What did you donate and how much?"></textarea>
+                </div>
+            </div>
+
+            <div id="student-fields" style="display: none;">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="college-name">College Name</label>
+                        <input type="text" class="form-control" id="college-name" placeholder="Enter your college name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id-proof-type-student">Identity Proof Type</label>
+                        <input type="text" class="form-control" id="id-proof-type-student" placeholder="College ID Card" required>
+                    </div>
+                    <div class="form-group">
+                        <h3 class="file-upload-heading">Upload College Identity Proof</h3>
+                        <div class="file-upload-box">
+                            <span class="file-name" id="file-name-student">No file chosen</span>
+                            <input type="file" id="upload-proof-student" accept=".pdf,.jpg,.jpeg,.png" onchange="updateFileName(this, 'file-name-student')" required style="display: none;">
+                            <label for="upload-proof-student" class="choose-file-btn">Choose File</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="completion-fields" id="completion-fields-student">
+                    <div class="form-group">
+                        <label for="experience-student">Your Experience of Volunteership</label>
+                        <textarea class="form-control" id="experience-student" rows="4" placeholder="Share your experience during the volunteership..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-student">Your Feedback</label>
+                        <textarea class="form-control" id="feedback-student" rows="4" placeholder="Please provide your feedback about the volunteership program..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <h3 class="file-upload-heading">Upload Certificate of Completion</h3>
+                        <div class="file-upload-box">
+                            <span class="file-name" id="certificate-file-name-student">No file chosen</span>
+                            <input type="file" id="upload-certificate-student" accept=".pdf,.jpg,.jpeg,.png" onchange="updateFileName(this, 'certificate-file-name-student')" required style="display: none;">
+                            <label for="upload-certificate-student" class="choose-file-btn">Choose File</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="non-student-fields" style="display: none;">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="profession">Describe Your Profession</label>
+                        <textarea class="form-control" id="profession" rows="3" placeholder="e.g., I am a working professional at..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="id-proof-type-non-student">Identity Proof Type</label>
+                        <input type="text" class="form-control" id="id-proof-type-non-student" placeholder="Aadhar Card / PAN Card" required>
+                    </div>
+                    <div class="form-group">
+                        <h3 class="file-upload-heading">Upload Identity Proof</h3>
+                        <div class="file-upload-box">
+                            <span class="file-name" id="file-name-non-student">No file chosen</span>
+                            <input type="file" id="upload-proof-non-student" accept=".pdf,.jpg,.jpeg,.png" onchange="updateFileName(this, 'file-name-non-student')" required style="display: none;">
+                            <label for="upload-proof-non-student" class="choose-file-btn">Choose File</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="completion-fields" id="completion-fields-non-student">
+                    <div class="form-group">
+                        <label for="experience-non-student">Your Experience of Volunteership</label>
+                        <textarea class="form-control" id="experience-non-student" rows="4" placeholder="Share your experience during the volunteership..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback-non-student">Your Feedback</label>
+                        <textarea class="form-control" id="feedback-non-student" rows="4" placeholder="Please provide your feedback about the volunteership program..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <h3 class="file-upload-heading">Upload Certificate of Completion</h3>
+                        <div class="file-upload-box">
+                            <span class="file-name" id="certificate-file-name-non-student">No file chosen</span>
+                            <input type="file" id="upload-certificate-non-student" accept=".pdf,.jpg,.jpeg,.png" onchange="updateFileName(this, 'certificate-file-name-non-student')" required style="display: none;">
+                            <label for="upload-certificate-non-student" class="choose-file-btn">Choose File</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-submit-container">
+                <button type="submit" class="btn btn-submit">Submit Application</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="popup" id="popup">
+        <h2>Thank You!</h2>
+        <p>Thanks for joining! You're one step closer to making a difference. We will email you once your application is approved.</p>
+        <button class="btn-close" onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        document.getElementById('role').addEventListener('change', function() {
+            const studentFields = document.getElementById('student-fields');
+            const nonStudentFields = document.getElementById('non-student-fields');
+            const selectedRole = this.value;
+            
+            if (selectedRole === 'student') {
+                studentFields.style.display = 'block';
+                nonStudentFields.style.display = 'none';
+                // Reset non-student fields
+                document.querySelectorAll('#non-student-fields input, #non-student-fields select, #non-student-fields textarea').forEach(element => {
+                    element.value = '';
+                });
+            } else if (selectedRole === 'non-student') {
+                studentFields.style.display = 'none';
+                nonStudentFields.style.display = 'block';
+                // Reset student fields
+                document.querySelectorAll('#student-fields input, #student-fields select').forEach(element => {
+                    element.value = '';
+                });
+            } else {
+                studentFields.style.display = 'none';
+                nonStudentFields.style.display = 'none';
+            }
+        });
+
+        document.getElementById('donation').addEventListener('change', function() {
+            var donationDetails = document.getElementById('donation-details');
+            if (this.value === 'yes') {
+                donationDetails.style.display = 'block';
+            } else {
+                donationDetails.style.display = 'none';
+            }
+        });
+
+        // Status management
+        let currentStatus = 'Applied';
+        const statusDisplay = document.getElementById('status');
+
+        function updateStatus(newStatus) {
+            currentStatus = newStatus;
+            statusDisplay.textContent = newStatus;
+            
+            const statusContainer = document.querySelector('.status-display');
+            statusContainer.classList.remove('approved', 'completed');
+            
+            if (newStatus === 'Approved') {
+                statusContainer.classList.add('approved');
+                // Show completion fields for both sections
+                document.getElementById('completion-fields-student').classList.add('show');
+                document.getElementById('completion-fields-non-student').classList.add('show');
+            } else if (newStatus === 'Completed') {
+                statusContainer.classList.add('completed');
+            }
+        }
+
+        // For demonstration/testing
+        document.querySelector('.status-display').addEventListener('click', function() {
+            if (currentStatus === 'Applied') {
+                updateStatus('Approved');
+            } else if (currentStatus === 'Approved') {
+                updateStatus('Completed');
+            }
+        });
+
+        document.getElementById('volunteerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const selectedRole = document.getElementById('role').value;
+            if (currentStatus === 'Approved') {
+                // Validate completion fields based on role
+                const rolePrefix = selectedRole === 'student' ? '-student' : '-non-student';
+                const experience = document.getElementById('experience' + rolePrefix).value;
+                const feedback = document.getElementById('feedback' + rolePrefix).value;
+                const certificate = document.getElementById('upload-certificate' + rolePrefix).files[0];
+                
+                if (!experience || !feedback || !certificate) {
+                    alert('Please fill in all completion fields before submitting.');
+                    return;
+                }
+                updateStatus('Completed');
+            }
+            document.getElementById('popup').style.display = 'block';
+        });
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        function updateFileName(input, spanId) {
+            const span = document.getElementById(spanId);
+            if (input.files && input.files[0]) {
+                span.textContent = input.files[0].name;
+            } else {
+                span.textContent = 'No file chosen';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Jeevan Ankur Trust</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-brown: #3A1E14;
+            --medium-brown: #5A3825;
+            --light-brown: #7A4E35;
+            --tan: #A07A5C;
+            --light-tan: #CAB49B;
+            --off-white: #F3E7DB;
+            --pure-white: #FFFDFB;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top right, var(--light-tan) 0%, var(--off-white) 30%, var(--pure-white) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container {
+            background: var(--pure-white);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(58, 30, 20, 0.15);
+            padding: 30px;
+            width: 100%;
+            max-width: 380px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--light-tan);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(58, 30, 20, 0.2);
+            border-color: var(--medium-brown);
+        }
+
+        .login-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--light-tan), var(--medium-brown), var(--light-tan));
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--light-tan), var(--medium-brown), var(--light-tan));
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .login-header::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--off-white) 0%, transparent 70%);
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .login-header img {
+            height: 70px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .login-header h1 {
+            color: var(--dark-brown);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+        }
+
+        .login-header p {
+            color: var(--medium-brown);
+            font-size: 1rem;
+            opacity: 0.85;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-label {
+            color: var(--dark-brown);
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            display: block;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .form-control {
+            background-color: var(--pure-white);
+            border: 2px solid var(--light-tan);
+            border-radius: 12px;
+            padding: 12px 15px;
+            color: var(--dark-brown);
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            letter-spacing: 0.2px;
+        }
+
+        .form-control::placeholder {
+            color: var(--tan);
+            font-size: 0.95rem;
+            letter-spacing: 0.2px;
+        }
+
+        .form-control:focus {
+            border-color: var(--medium-brown);
+            box-shadow: 0 0 0 0.2rem rgba(90, 56, 37, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .form-control:focus + .form-label {
+            transform: translateY(-2px);
+            color: var(--medium-brown);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group-text {
+            background: transparent;
+            border: none;
+            color: var(--medium-brown);
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group-text:hover {
+            color: var(--dark-brown);
+        }
+
+        .btn-login {
+            background: var(--dark-brown);
+            color: var(--light-tan);
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .btn-login:hover {
+            background: var(--light-tan);
+            color: var(--dark-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(58, 30, 20, 0.2);
+            font-weight: 700;
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(58, 30, 20, 0.15);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .forgot-password {
+            color: var(--medium-brown);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            letter-spacing: 0.2px;
+        }
+
+        .forgot-password::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--dark-brown);
+            transition: width 0.3s ease;
+        }
+
+        .forgot-password:hover::after {
+            width: 100%;
+        }
+
+        .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: var(--medium-brown);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--light-tan);
+            color: var(--dark-brown);
+            background: var(--pure-white);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 8px rgba(58, 30, 20, 0.08);
+        }
+
+        .social-btn:hover {
+            border-color: var(--dark-brown);
+            background: var(--dark-brown);
+            color: var(--pure-white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(58, 30, 20, 0.15);
+        }
+
+        .social-btn.phone-btn {
+            color: var(--dark-brown);
+        }
+
+        .social-btn.phone-btn:hover {
+            color: var(--pure-white);
+        }
+
+        .social-btn i {
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover i {
+            transform: scale(1.1);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--medium-brown);
+            font-size: 1rem;
+            letter-spacing: 0.2px;
+        }
+
+        .signup-link a {
+            color: var(--dark-brown);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.2px;
+        }
+
+        .signup-link a:hover {
+            color: var(--medium-brown);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 400px) {
+            .login-container {
+                padding: 25px;
+            }
+            .login-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .modal-content {
+            background-color: var(--pure-white);
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 15px 35px rgba(58, 30, 20, 0.15);
+        }
+
+        .modal-header {
+            border-bottom: 2px solid var(--light-tan);
+            padding: 1.25rem 1.5rem;
+        }
+
+        .modal-header .modal-title {
+            color: var(--dark-brown);
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .modal-header .btn-close {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            border-top: none;
+            padding: 1rem 1.5rem 1.5rem;
+        }
+
+        .otp-container {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--light-tan);
+            border-radius: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--dark-brown);
+            font-weight: 600;
+            background-color: var(--pure-white);
+        }
+
+        .otp-input:focus {
+            border-color: var(--medium-brown);
+            box-shadow: 0 0 0 0.2rem rgba(90, 56, 37, 0.1);
+            outline: none;
+        }
+
+        .btn-verify {
+            background: var(--dark-brown);
+            color: var(--light-tan);
+            border-radius: 12px;
+            font-weight: 600;
+            padding: 12px 25px;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-verify:hover {
+            background: var(--light-tan);
+            color: var(--dark-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(58, 30, 20, 0.15);
+        }
+
+        .phone-text {
+            color: var(--medium-brown);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .resend-code {
+            color: var(--medium-brown);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: block;
+            text-align: center;
+        }
+
+        .resend-code:hover {
+            color: var(--dark-brown);
+            text-decoration: underline;
+        }
+
+        /* Notification styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background-color: var(--dark-brown);
+            color: var(--pure-white);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .notification-message {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--pure-white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(58, 30, 20, 0.15);
+            z-index: 1000;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid var(--light-tan);
+            animation: popupFadeIn 0.5s ease;
+        }
+
+        @keyframes popupFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .popup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--dark-brown), var(--medium-brown), var(--light-brown));
+            border-radius: 15px 15px 0 0;
+        }
+
+        .popup-icon {
+            font-size: 4rem;
+            color: var(--medium-brown);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .popup-icon i {
+            animation: pulseAndFloat 3s ease-in-out infinite;
+            color: var(--medium-brown);
+        }
+
+        @keyframes pulseAndFloat {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(58, 30, 20, 0.3);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            animation: overlayFadeIn 0.5s ease;
+        }
+
+        @keyframes overlayFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-brown);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .popup p {
+            font-family: 'Poppins', sans-serif;
+            color: var(--medium-brown);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <img src="assets/images/logo.png" alt="Jeevan Ankur Trust Logo">
+            <h1>Welcome Back</h1>
+            <p>Continue your journey of compassion</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" placeholder="Enter your password" required>
+                    <span class="input-group-text">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-login">Sign In</button>
+
+            <div class="login-footer">
+                <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+            </div>
+
+            <div class="social-login">
+                <p>Or continue with</p>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn" id="googleLogin" title="Login with Google">
+                        <i class="fab fa-google"></i>
+                    </a>
+                    <a href="#" class="social-btn" id="phoneLogin" title="Login with Phone" data-bs-toggle="modal" data-bs-target="#phoneModal">
+                        <i class="fas fa-mobile-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="signup-link">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Phone Authentication Modal -->
+    <div class="modal fade" id="phoneModal" tabindex="-1" aria-labelledby="phoneModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="phoneModalLabel">Login with Phone</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="phoneInputStep">
+                        <p class="phone-text">Enter your phone number to receive a verification code</p>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text" style="position: relative; transform: none; left: auto; top: auto; background-color: var(--light-tan); border-radius: 12px 0 0 12px; border: 2px solid var(--light-tan); border-right: none; color: var(--dark-brown);">+91</span>
+                                <input type="tel" class="form-control" id="phoneNumber" placeholder="Enter your 10-digit number" pattern="[0-9]*" maxlength="10" style="border-radius: 0 12px 12px 0;">
+                            </div>
+                        </div>
+                        <button class="btn btn-verify mt-3" id="sendOtpBtn">Send Verification Code</button>
+                    </div>
+                    
+                    <div id="otpInputStep" style="display: none;">
+                        <p class="phone-text">Enter the 6-digit verification code sent to your phone</p>
+                        <div class="otp-container">
+                            <input type="text" maxlength="1" class="otp-input" id="otp1">
+                            <input type="text" maxlength="1" class="otp-input" id="otp2">
+                            <input type="text" maxlength="1" class="otp-input" id="otp3">
+                            <input type="text" maxlength="1" class="otp-input" id="otp4">
+                            <input type="text" maxlength="1" class="otp-input" id="otp5">
+                            <input type="text" maxlength="1" class="otp-input" id="otp6">
+                        </div>
+                        <button class="btn btn-verify" id="verifyOtpBtn">Verify & Login</button>
+                        <a href="#" class="resend-code" id="resendCode">Didn't receive the code? Resend</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="otpNotification">
+        <div class="notification-title">Verification Code</div>
+        <div class="notification-message">Your OTP is: <span id="otpCode"></span></div>
+    </div>
+
+    <div class="popup-overlay" id="popup-overlay"></div>
+    <div class="popup" id="popup">
+        <div class="popup-icon">
+            <i class="fas fa-heart"></i>
+        </div>
+        <h2>Welcome Back! 💫</h2>
+        <p>It's wonderful to see you again! Together, we'll continue creating countless smiles and spreading hope! ✨</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle password visibility
+        document.querySelector('.input-group-text').addEventListener('click', function() {
+            const passwordInput = this.previousElementSibling;
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get form inputs
+            const email = document.querySelector('input[type="email"]').value;
+            const password = document.querySelector('input[type="password"]').value;
+            
+            // Basic validation
+            if (email && password) {
+                // Show popup
+                document.getElementById('popup-overlay').style.display = 'block';
+                document.getElementById('popup').style.display = 'block';
+                
+                // Redirect to home page after 2 seconds
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 2000);
+            } else {
+                alert('Please enter both email and password');
+            }
+        });
+
+        // Social login handlers
+        document.getElementById('googleLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email%20profile';
+        });
+
+        // Phone login handlers
+        document.getElementById('phoneLogin').addEventListener('click', function(e) {
+            // Modal will be shown automatically via data-bs-toggle
+        });
+
+        // Send OTP button click
+        document.getElementById('sendOtpBtn').addEventListener('click', function() {
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            if(phoneNumber && phoneNumber.length === 10 && /^\d+$/.test(phoneNumber)) {
+                // Show OTP input step
+                document.getElementById('phoneInputStep').style.display = 'none';
+                document.getElementById('otpInputStep').style.display = 'block';
+                
+                // Generate a random 6-digit OTP
+                const otp = Math.floor(100000 + Math.random() * 900000).toString();
+                console.log('Generated OTP:', otp);
+                
+                // Display the OTP in a notification
+                document.getElementById('otpCode').textContent = otp;
+                const notification = document.getElementById('otpNotification');
+                notification.classList.add('show');
+                
+                // Hide notification after 10 seconds
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                }, 10000);
+                
+                // Pre-fill the OTP fields for demo purposes
+                const otpInputs = document.querySelectorAll('.otp-input');
+                for (let i = 0; i < 6; i++) {
+                    setTimeout(function() {
+                        otpInputs[i].value = otp[i];
+                        // Add a visual indication that the field was filled
+                        otpInputs[i].style.backgroundColor = 'var(--off-white)';
+                        setTimeout(function() {
+                            otpInputs[i].style.backgroundColor = 'var(--pure-white)';
+                        }, 300);
+                    }, i * 300); // Stagger the filling for a more realistic effect
+                }
+            } else {
+                alert('Please enter a valid 10-digit phone number');
+            }
+        });
+
+        // Set up OTP input fields to move focus automatically
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('keyup', function(e) {
+                if(e.key >= '0' && e.key <= '9') {
+                    input.value = e.key;
+                    if(index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                } else if(e.key === 'Backspace') {
+                    input.value = '';
+                    if(index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                }
+            });
+        });
+
+        // Verify OTP button click
+        document.getElementById('verifyOtpBtn').addEventListener('click', function() {
+            let otp = '';
+            otpInputs.forEach(input => {
+                otp += input.value;
+            });
+            
+            if(otp.length === 6) {
+                // In a real implementation, you would verify the OTP with your backend
+                console.log('Verifying OTP: ' + otp);
+                
+                // Close the modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('phoneModal'));
+                modal.hide();
+                
+                // Redirect to dashboard or home page after successful login
+                window.location.href = 'index.html';
+            } else {
+                alert('Please enter a valid 6-digit OTP');
+            }
+        });
+
+        // Resend code click
+        document.getElementById('resendCode').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Generate a new random OTP
+            const otp = Math.floor(100000 + Math.random() * 900000).toString();
+            console.log('Resent OTP:', otp);
+            
+            // Display the new OTP
+            document.getElementById('otpCode').textContent = otp;
+            const notification = document.getElementById('otpNotification');
+            notification.classList.add('show');
+            
+            // Hide notification after 10 seconds
+            setTimeout(function() {
+                notification.classList.remove('show');
+            }, 10000);
+            
+            // Pre-fill the OTP fields for demo purposes
+            const otpInputs = document.querySelectorAll('.otp-input');
+            // Clear existing values first
+            otpInputs.forEach(input => input.value = '');
+            
+            for (let i = 0; i < 6; i++) {
+                setTimeout(function() {
+                    otpInputs[i].value = otp[i];
+                    // Add a visual indication that the field was filled
+                    otpInputs[i].style.backgroundColor = 'var(--off-white)';
+                    setTimeout(function() {
+                        otpInputs[i].style.backgroundColor = 'var(--pure-white)';
+                    }, 300);
+                }, i * 300);
+            }
+            
+            alert('A new verification code has been sent to your phone');
+        });
+
+        // Numeric only validation for phone numbers
+        document.querySelectorAll('input[type="tel"]').forEach(function(input) {
+            input.addEventListener('input', function(e) {
+                this.value = this.value.replace(/[^0-9]/g, '');
+                if (this.value.length > 10) {
+                    this.value = this.value.slice(0, 10);
+                }
+            });
+
+            input.addEventListener('keypress', function(e) {
+                if (!/[0-9]/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
